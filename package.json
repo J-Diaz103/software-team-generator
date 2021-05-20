@@ -1,0 +1,23 @@
+{
+  "name": "software-team-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/J-Diaz103/software-team-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/J-Diaz103/software-team-generator/issues"
+  },
+  "homepage": "https://github.com/J-Diaz103/software-team-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  }
+}
