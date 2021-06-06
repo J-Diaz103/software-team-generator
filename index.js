@@ -1,8 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
 team = [];
-teamid=[];
+teamid=[]; 
 //this will be to chose what tyoe team member to add
 const teambuilder = () => {
     console.log("choose a team member to add")
@@ -34,12 +39,12 @@ const  managerBuilder = () => {
         {
             type:'input',
             message:"What is the Manager name?",
-            name: "manager"
+            name: "managerName"
         },
         {
             type:'input',
             message:'what is the manager ID number?',
-            name:"id"
+            name:"managerId"
         },
         {
             type:'input',
@@ -49,22 +54,14 @@ const  managerBuilder = () => {
         {
             type:'input',
             message:'what is the office number?',
-            name:"officenum"
+            name:"officeNum"
         },
 
     ])
-    // .then(answers => {
-    //     const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
-    //     teamMembers.push(engineer);
-    //     idArray.push(answers.engineerId);
-    //     createTeam();
-    //   });
     .then(answers => {
-        
-        console.info('Answer:', answers.manager);
-        console.info('Answer:', answers.id);
-        console.info('Answer:', answers.email);
-        console.info('Answer:', answers.officenum);
+        const manager = new Manager(answers.managerName, answers.managerId, answers.email, answers.officeNum);
+        team.push(manager);
+        teamid.push(answers.managerId);
         ending();
       });
     }
@@ -76,12 +73,12 @@ const  engineerBuilder = () => {
         {
             type:'input',
             message:"What is the Engineer's name?",
-            name: "engineer"
+            name: "engineerName"
         },
         {
             type:'input',
             message:'what is the ID number?',
-            name:"id"
+            name:"engineerId"
         },
         {
             type:'input',
@@ -96,10 +93,9 @@ const  engineerBuilder = () => {
 
     ])
     .then(answers => {
-        console.info('Answer:', answers.engineer);
-        console.info('Answer:', answers.id);
-        console.info('Answer:', answers.email);
-        console.info('Answer:', answers.username);
+        const engineer = new Engineer (answers.engineerName, answers.engineerId, answers.email, answers.username);
+        team.push(engineer);
+        teamid.push(answers.engineerId);
         ending();
         });
     }
@@ -111,12 +107,12 @@ const  internBuilder = () => {
         {
             type:'input',
             message:"What is the Intern name?",
-            name: "intern"
+            name: "internName"
         },
         {
             type:'input',
             message:'what is the ID number?',
-            name:"id"
+            name:"internId"
         },
         {
             type:'input',
@@ -131,10 +127,9 @@ const  internBuilder = () => {
 
     ])
     .then(answers => {
-        console.info('Answer:', answers.inter);
-        console.info('Answer:', answers.id);
-        console.info('Answer:', answers.email);
-        console.info('Answer:', answers.school);
+        const intern = new Intern(answers.internName, answers.internId, answers.email, answers.school);
+        team.push(intern);
+        teamid.push(answers.internrId);
         ending();
         });
     }
@@ -152,9 +147,41 @@ const ending = () => {
         // If the user says yes to another game, play again, otherwise quit the game
         if (val.choice) {
           teambuilder();
-        } else { console.log("this will need to add the html for the cards")}
+        } else { 
+            // should use a for each loop to get each item in the team array
+            // use the team id array to make sure that an id is not used more than once
+            console.log("this will need to add the html for the cards");
+            console.log(team);
+            console.log(teamid);
+        }
       });
 }
 
 
-teambuilder();
+// teambuilder();
+
+const generateHTML = () =>
+  `<!-- this is the setup for the team cards -->
+  <!-- <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        Name
+      </div>
+      <div class="card-header">
+          Position
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+      </ul>
+    </div> -->`;
+
+// Bonus using writeFileAsync as a promise
+const init = () => {
+    teambuilder()
+    .then((answers) => writeFileAsync('index.html', generateHTML(answers)))
+    .then(() => console.log('Successfully wrote to index.html'))
+    .catch((err) => console.error(err));
+};
+
+init();
