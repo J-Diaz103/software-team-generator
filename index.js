@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 team = [];
+teamid=[];
 //this will be to chose what tyoe team member to add
 const teambuilder = () => {
     console.log("choose a team member to add")
@@ -52,6 +53,12 @@ const  managerBuilder = () => {
         },
 
     ])
+    // .then(answers => {
+    //     const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+    //     teamMembers.push(engineer);
+    //     idArray.push(answers.engineerId);
+    //     createTeam();
+    //   });
     .then(answers => {
         
         console.info('Answer:', answers.manager);
