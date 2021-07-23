@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-
-const Employee = require('./lib/Employee');
+const path = require("path");
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const template = require('./src/template');
 
 team = [];
 teamid=[]; 
@@ -153,35 +153,17 @@ const ending = () => {
             console.log("this will need to add the html for the cards");
             console.log(team);
             console.log(teamid);
+            let builtTeam = template(team);
+            console.log(builtTeam);
+            fs.writeFileSync("index.html", builtTeam, function(err){
+                if(err){
+                    return console.log(err)
+                }
+            });
         }
       });
 }
 
 
-// teambuilder();
+teambuilder();
 
-const generateHTML = () =>
-  `<!-- this is the setup for the team cards -->
-  <!-- <div class="card" style="width: 18rem;">
-      <div class="card-header">
-        Name
-      </div>
-      <div class="card-header">
-          Position
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-      </ul>
-    </div> -->`;
-
-// Bonus using writeFileAsync as a promise
-const init = () => {
-    teambuilder()
-    .then((answers) => writeFileAsync('index.html', generateHTML(answers)))
-    .then(() => console.log('Successfully wrote to index.html'))
-    .catch((err) => console.error(err));
-};
-
-init();
