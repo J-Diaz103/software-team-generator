@@ -1,5 +1,4 @@
 const teamCards = softWareTeam => {
-  // https://github.com/
 
     const buildManager = manager => {
         return `
@@ -17,7 +16,6 @@ const teamCards = softWareTeam => {
       </ul>
     </div> `;
     };
-    // <li class="list-group-item">${manager.getEmail()}</li>
 
     const buildIntern = intern => {
       return `
@@ -48,10 +46,10 @@ const teamCards = softWareTeam => {
   <ul class="list-group list-group-flush">
     <li class="list-group-item">${engineer.getId()}</li>
     <li class="list-group-item">${engineer.getEmail()}</li>
-    <li class="list-group-item"><a href="https://github.com/${engineer.github()}">${engineer.github()}</a></li>
+    <li class="list-group-item"><a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
   </ul>
 </div> `;
-};// <li class="list-group-item">${engineer.github()}</li>
+};
 
 
   const html = [];

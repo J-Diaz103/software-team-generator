@@ -129,7 +129,7 @@ const  internBuilder = () => {
     .then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.email, answers.school);
         team.push(intern);
-        teamid.push(answers.internrId);
+        teamid.push(answers.internId);
         ending();
         });
     }
@@ -155,7 +155,7 @@ const ending = () => {
             console.log(teamid);
             let builtTeam = template(team);
             console.log(builtTeam);
-            fs.writeFileSync("index.html", builtTeam, function(err){
+            fs.writeFileSync("team.html", builtTeam, function(err){
                 if(err){
                     return console.log(err)
                 }
